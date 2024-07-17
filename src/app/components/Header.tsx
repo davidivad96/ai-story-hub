@@ -3,20 +3,19 @@
 import { GitHubLogoIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { Flex, Heading, IconButton } from "@radix-ui/themes";
 import { useTheme } from "next-themes";
-import Image from "next/image";
+import Logo from "./Logo";
 
 const Header: React.FC = () => {
   const { theme, setTheme } = useTheme();
 
+  const switchTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
+  };
+
   return (
     <Flex justify="between" align="center" p="16px 24px">
       <Flex align="center" gap="4">
-        <Image
-          src={theme === "dark" ? "/white_logo.svg" : "/logo.svg"}
-          alt="logo"
-          width={50}
-          height={50}
-        />
+        <Logo />
         <Heading size="6">AI Story Hub</Heading>
       </Flex>
       <Flex align="center" gap="4">
@@ -25,10 +24,7 @@ const Header: React.FC = () => {
             <GitHubLogoIcon width="20" height="20" />
           </a>
         </IconButton>
-        <IconButton
-          variant="ghost"
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-        >
+        <IconButton variant="ghost" onClick={switchTheme}>
           {theme === "dark" ? (
             <MoonIcon width="20" height="20" />
           ) : (

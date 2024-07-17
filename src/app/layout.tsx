@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 };
 
 const RootLayout: React.FC<PropsWithChildren> = ({ children }) => (
-  <html lang="en">
+  <html lang="en" suppressHydrationWarning>
     <body className={inter.className}>
       <ThemeProvider attribute="class" defaultTheme="dark">
         <Theme accentColor="gray">
