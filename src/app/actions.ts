@@ -2,6 +2,7 @@
 
 import { kv } from "@vercel/kv";
 import { generateId } from "ai";
+import { revalidatePath } from "next/cache";
 import { FormData, Story } from "./types";
 
 export const saveStory = async (
@@ -19,4 +20,5 @@ export const saveStory = async (
       content,
     },
   });
+  revalidatePath("/api/stories");
 };
