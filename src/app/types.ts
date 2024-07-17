@@ -18,3 +18,10 @@ export type FormData = {
   tone: Tone;
   language: Language;
 };
+
+export type Story = Pick<
+  FormData,
+  "title" | "genre" | "narrativeStyle" | "theme" | "language"
+> & {
+  content: string;
+};
