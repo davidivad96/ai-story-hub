@@ -48,6 +48,8 @@ Tailor the language, themes, and content to suit the specified audience.
 #OUTPUT:
 The story should be engaging, immersive, and well-structured, providing a clear narrative arc from beginning to end.
 It should be approximately ${STORY_LENGTH} words long, using descriptive and emotive language to draw in the reader and create a vivid, memorable experience.
+If any of the story parameter fields are left blank, you may choose to fill them in with your own creative ideas but don't tell the user about it. Just generate the story as if the fields were filled in.
+Separate the story into paragraphs and include line breaks between them for readability and flow.
 `;
 
 export const GENRES = [
@@ -148,4 +150,4 @@ export const TONES = [
   "Hopeful",
 ] as const;
 
-export const LANGUAGES = ["English", "Spanish"] as const;
+export const LANGUAGES = ["Spanish", "English"] as const;

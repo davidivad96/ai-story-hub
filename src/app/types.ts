@@ -7,3 +7,14 @@ export type NarrativeStyle = (typeof NARRATIVE_STYLES)[number];
 export type Tone = (typeof TONES)[number];
 
 export type Language = (typeof LANGUAGES)[number];
+
+export type FormData = {
+  title: string;
+  genre: Genre;
+  theme: string;
+  setting: string;
+  character: string;
+  narrativeStyle: NarrativeStyle;
+  tone: Tone;
+  language: Language;
+};

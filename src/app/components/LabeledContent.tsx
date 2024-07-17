@@ -1,4 +1,4 @@
-import { Flex, Text } from "@radix-ui/themes";
+import { Box, Heading } from "@radix-ui/themes";
 import { PropsWithChildren } from "react";
 
 type Props = PropsWithChildren & {
@@ -6,12 +6,12 @@ type Props = PropsWithChildren & {
 };
 
 const LabeledContent: React.FC<Props> = ({ label, children }) => (
-  <Flex direction="row" align="center" gap="2">
-    <Text as="label" size="1" weight="bold" color="gray">
-      {label}:
-    </Text>
+  <Box>
+    <Heading size="2" mb="2">
+      {label}
+    </Heading>
     {children}
-  </Flex>
+  </Box>
 );
 
 export default LabeledContent;
