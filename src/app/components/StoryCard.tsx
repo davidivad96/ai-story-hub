@@ -17,10 +17,10 @@ const StoryCard: React.FC<Props> = ({
         <Heading size="4" mb="2">
           {title}
         </Heading>
-        <Badge mr="2">{genre}</Badge>
-        <Badge mr="2">{narrativeStyle}</Badge>
-        <Badge mr="2">{theme}</Badge>
-        <Badge>{language}</Badge>
+        {genre && <Badge mr="2">{genre}</Badge>}
+        {narrativeStyle && <Badge mr="2">{narrativeStyle}</Badge>}
+        {theme && <Badge mr="2">{theme}</Badge>}
+        {language && <Badge>{language}</Badge>}
       </Card>
     </Dialog.Trigger>
     <StoryModalContent title={title} content={content} />
