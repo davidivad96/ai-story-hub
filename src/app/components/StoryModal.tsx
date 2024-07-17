@@ -1,4 +1,5 @@
-import { Button, Dialog, Tooltip } from "@radix-ui/themes";
+import { Cross1Icon } from "@radix-ui/react-icons";
+import { Button, Dialog, IconButton, Tooltip } from "@radix-ui/themes";
 import { useCompletion } from "ai/react";
 import { FormData } from "../types";
 
@@ -11,7 +12,7 @@ const StoryModal: React.FC<Props> = ({ formData, disabled = false }) => {
   const { complete, completion } = useCompletion({ api: "/api/completion" });
 
   const handleGenerate = async () => {
-    complete(`
+    const response = await complete(`
       Tell me a story with the following parameters:
       - Genre: ${formData.genre}
       - Theme: ${formData.theme}
@@ -21,6 +22,7 @@ const StoryModal: React.FC<Props> = ({ formData, disabled = false }) => {
       - Tone: ${formData.tone}
       - Language: ${formData.language}
     `);
+    console.log(response);
   };
 
   return (
@@ -39,6 +41,11 @@ const StoryModal: React.FC<Props> = ({ formData, disabled = false }) => {
         )}
       </Dialog.Trigger>
       <Dialog.Content maxWidth="800px">
+        <Dialog.Close style={{ float: "right" }}>
+          <IconButton variant="ghost">
+            <Cross1Icon />
+          </IconButton>
+        </Dialog.Close>
         <Dialog.Title>{formData.title}</Dialog.Title>
         <Dialog.Description size="2" mb="4">
           {completion}
