@@ -112,6 +112,10 @@ export const CHARACTERS = [
   "A determined explorer",
   "A conflicted anti-hero",
   "A powerful sorceress",
+  "A normal person in extraordinary circumstances",
+  "A group of unlikely allies",
+  "A pair of star-crossed lovers",
+  "A loyal sidekick",
 ] as const;
 
 export const NARRATIVE_STYLES = [

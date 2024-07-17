@@ -1,7 +1,17 @@
 "use client";
 
+import {
+  Button,
+  CheckboxGroup,
+  Container,
+  Flex,
+  Select,
+  Separator,
+  TextField,
+} from "@radix-ui/themes";
 import { useCompletion } from "ai/react";
 import { useState } from "react";
+import LabeledContent from "./components/LabeledContent";
 import {
   CHARACTERS,
   GENRES,
@@ -42,96 +52,119 @@ const StoryGenerator = () => {
       setForm((prev) => ({ ...prev, [key]: value }));
     };
 
+  const handleGenerate = async () => {
+    await complete(`
+      Tell me a story with the following parameters:
+      - Genre: ${form.genre}
+      - Theme: ${form.theme}
+      - Setting: ${form.setting}
+      - Character: ${form.character}
+      - Narrative style: ${form.narrativeStyle}
+      - Tone: ${form.tone.join(", ")}
+    `);
+  };
+
   return (
-    <div className="flex flex-col justify-center">
-      <select
-        value={form.genre}
-        onChange={(e) => updateForm("genre")(e.target.value as Genre)}
-      >
-        {GENRES.map((genre) => (
-          <option key={genre} value={genre}>
-            {genre}
-          </option>
-        ))}
-      </select>
-      <input
-        type="text"
-        placeholder="Love and friendship"
-        className="border border-gray-300"
-        value={form.theme}
-        onChange={(e) => updateForm("theme")(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="A small village in the mountains"
-        className="border border-gray-300"
-        value={form.setting}
-        onChange={(e) => updateForm("setting")(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="A brave knight"
-        className="border border-gray-300"
-        value={form.character}
-        onChange={(e) => updateForm("character")(e.target.value)}
-      />
-      <select
-        value={form.narrativeStyle}
-        onChange={(e) =>
-          updateForm("narrativeStyle")(e.target.value as NarrativeStyle)
-        }
-      >
-        {NARRATIVE_STYLES.map((narrativeStyle) => (
-          <option key={narrativeStyle} value={narrativeStyle}>
-            {narrativeStyle}
-          </option>
-        ))}
-      </select>
-      {TONES.map((tone) => (
-        <label key={tone}>
-          <input
-            type="checkbox"
-            checked={form.tone.includes(tone)}
-            onChange={(e) => {
-              if (e.target.checked) {
-                updateForm("tone")([...form.tone, tone]);
-              } else {
-                updateForm("tone")(form.tone.filter((t) => t !== tone));
+    <Container py="9">
+      <Flex direction="column" gap="6">
+        <Flex direction="row" justify="between" align="center">
+          <LabeledContent label="Genre">
+            <Select.Root
+              value={form.genre}
+              onValueChange={(val) => updateForm("genre")(val as Genre)}
+            >
+              <Select.Trigger />
+              <Select.Content>
+                {GENRES.map((genre) => (
+                  <Select.Item key={genre} value={genre}>
+                    {genre}
+                  </Select.Item>
+                ))}
+              </Select.Content>
+            </Select.Root>
+          </LabeledContent>
+          <Separator orientation="vertical" />
+          <LabeledContent label="Theme">
+            <TextField.Root
+              placeholder="Love and friendship"
+              value={form.theme}
+              onChange={(e) => updateForm("theme")(e.target.value)}
+            />
+          </LabeledContent>
+          <Separator orientation="vertical" />
+          <LabeledContent label="Setting">
+            <TextField.Root
+              placeholder="A small village in the mountains"
+              value={form.setting}
+              onChange={(e) => updateForm("setting")(e.target.value)}
+            />
+          </LabeledContent>
+          <Separator orientation="vertical" />
+          <LabeledContent label="Character">
+            <TextField.Root
+              placeholder="A brave knight"
+              value={form.character}
+              onChange={(e) => updateForm("character")(e.target.value)}
+            />
+          </LabeledContent>
+          <Separator orientation="vertical" />
+          <LabeledContent label="Narrative style">
+            <Select.Root
+              value={form.narrativeStyle}
+              onValueChange={(val) =>
+                updateForm("narrativeStyle")(val as NarrativeStyle)
               }
-            }}
-            disabled={form.tone.length === 3 && !form.tone.includes(tone)}
-          />
-          {tone}
-        </label>
-      ))}
-      <select
-        value={form.language}
-        onChange={(e) => updateForm("language")(e.target.value as Language)}
-      >
-        {LANGUAGES.map((language) => (
-          <option key={language} value={language}>
-            {language}
-          </option>
-        ))}
-      </select>
-      <button
-        onClick={async () => {
-          await complete(`
-            Tell me a story with the following parameters:
-            - Genre: ${form.genre}
-            - Theme: ${form.theme}
-            - Setting: ${form.setting}
-            - Character: ${form.character}
-            - Narrative style: ${form.narrativeStyle}
-            - Tone: ${form.tone.join(", ")}
-            - Language: ${form.language}
-          `);
-        }}
-      >
-        Submit
-      </button>
-      {completion}
-    </div>
+            >
+              <Select.Trigger />
+              <Select.Content>
+                {NARRATIVE_STYLES.map((narrativeStyle) => (
+                  <Select.Item key={narrativeStyle} value={narrativeStyle}>
+                    {narrativeStyle}
+                  </Select.Item>
+                ))}
+              </Select.Content>
+            </Select.Root>
+          </LabeledContent>
+        </Flex>
+        <Flex direction="row" justify="between" align="center">
+          <LabeledContent label="Tone">
+            <CheckboxGroup.Root
+              name="tones"
+              onValueChange={(val) => {
+                updateForm("tone")(val as Tone[]);
+              }}
+            >
+              {TONES.map((tone) => (
+                <CheckboxGroup.Item
+                  key={tone}
+                  value={tone}
+                  disabled={form.tone.length === 3 && !form.tone.includes(tone)}
+                >
+                  {tone}
+                </CheckboxGroup.Item>
+              ))}
+            </CheckboxGroup.Root>
+          </LabeledContent>
+          <LabeledContent label="Language">
+            <Select.Root
+              value={form.language}
+              onValueChange={(val) => updateForm("language")(val as Language)}
+            >
+              <Select.Trigger />
+              <Select.Content>
+                {LANGUAGES.map((language) => (
+                  <Select.Item key={language} value={language}>
+                    {language}
+                  </Select.Item>
+                ))}
+              </Select.Content>
+            </Select.Root>
+          </LabeledContent>
+        </Flex>
+        <Button onClick={handleGenerate}>Generate</Button>
+        {completion}
+      </Flex>
+    </Container>
   );
 };
 
