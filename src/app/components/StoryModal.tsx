@@ -9,7 +9,9 @@ type Props = {
 };
 
 const StoryModal: React.FC<Props> = ({ formData, disabled = false }) => {
-  const { complete, completion } = useCompletion({ api: "/api/completion" });
+  const { complete, completion, stop } = useCompletion({
+    api: "/api/completion",
+  });
 
   const handleGenerate = async () => {
     const response = await complete(`
@@ -26,7 +28,11 @@ const StoryModal: React.FC<Props> = ({ formData, disabled = false }) => {
   };
 
   return (
-    <Dialog.Root>
+    <Dialog.Root
+      onOpenChange={(open) => {
+        if (!open) stop();
+      }}
+    >
       <Dialog.Trigger>
         {disabled ? (
           <Tooltip content="Title is required">
