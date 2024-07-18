@@ -1,5 +1,5 @@
 import { Cross1Icon } from "@radix-ui/react-icons";
-import { Dialog, IconButton } from "@radix-ui/themes";
+import { Dialog, IconButton, Text } from "@radix-ui/themes";
 
 type Props = {
   title: string;
@@ -15,7 +15,7 @@ const StoryModalContent: React.FC<Props> = ({ title, content }) => (
     </Dialog.Close>
     <Dialog.Title>{title}</Dialog.Title>
     <Dialog.Description size="2" mb="4">
-      {content}
+      <Text className="whitespace-pre-wrap">{content}</Text>
     </Dialog.Description>
   </Dialog.Content>
 );
