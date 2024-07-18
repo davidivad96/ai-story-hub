@@ -1,6 +1,6 @@
-import { Card, Container, Flex, Heading } from "@radix-ui/themes";
+import { Flex } from "@radix-ui/themes";
+import CreateStoryFormCard from "./components/CreateStoryFormCard";
 import Footer from "./components/Footer";
-import Form from "./components/Form";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 
@@ -9,14 +9,7 @@ const Main = () => (
     <Header />
     <Flex p="4" gap="6" style={{ flex: 1 }}>
       <Sidebar />
-      <Container size="3">
-        <Flex direction="column">
-          <Heading mb="4">Create your story</Heading>
-          <Card style={{ padding: 16 }}>
-            <Form />
-          </Card>
-        </Flex>
-      </Container>
+      <CreateStoryFormCard />
     </Flex>
     <Footer />
   </Flex>
