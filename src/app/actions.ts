@@ -23,3 +23,8 @@ export const saveStory = async (
   });
   revalidatePath("/");
 };
+
+export const deleteStory = async (storyId: string) => {
+  await kv.hdel("stories", storyId);
+  revalidatePath("/");
+};
