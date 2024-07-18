@@ -2,7 +2,7 @@ import { OpenAIChatModelId } from "@ai-sdk/openai/internal";
 
 export const MODEL_NAME: OpenAIChatModelId = "gpt-3.5-turbo";
 
-export const STORY_LENGTH = 500;
+export const STORY_LENGTH = 350;
 
 export const SYSTEM_PROMPT = `
 #CONTEXT:
