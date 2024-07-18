@@ -7,7 +7,7 @@ const Sidebar: React.FC = async () => {
   const stories = await kv.hgetall<Record<string, Story>>("stories");
 
   return (
-    <Card style={{ width: 300, height: "75vh", padding: 16 }}>
+    <Card style={{ width: 300, height: "calc(100vh - 166px)", padding: 16 }}>
       <Flex direction="column" height="100%">
         <Heading mb="4">Stories</Heading>
         <ScrollArea style={{ height: "100%" }}>
