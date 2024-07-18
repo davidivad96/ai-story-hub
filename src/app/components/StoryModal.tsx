@@ -25,7 +25,9 @@ const StoryModal: React.FC<Props> = ({ formData, disabled = false }) => {
       - Tone: ${formData.tone}
       - Language: ${formData.language}
     `);
-    await saveStory(formData, response ?? "");
+    if (response) {
+      await saveStory(formData, response);
+    }
   };
 
   return (

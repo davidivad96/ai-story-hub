@@ -3,13 +3,11 @@ import { Story } from "../types";
 import StoryModalContent from "./StoryModalContent";
 
 type Props = {
-  id: string;
   story: Story;
 };
 
 const StoryCard: React.FC<Props> = ({
-  id,
-  story: { title, genre, narrativeStyle, theme, language, content },
+  story: { id, title, genre, narrativeStyle, theme, language, content },
 }) => (
   <Dialog.Root>
     <Dialog.Trigger>

@@ -23,5 +23,6 @@ export type Story = Pick<
   FormData,
   "title" | "genre" | "narrativeStyle" | "theme" | "language"
 > & {
+  id: string;
   content: string;
 };

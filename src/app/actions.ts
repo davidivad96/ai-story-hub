@@ -12,6 +12,7 @@ export const saveStory = async (
   const id = generateId();
   await kv.hset<Story>("stories", {
     [id]: {
+      id,
       title,
       genre,
       narrativeStyle,
@@ -20,5 +21,5 @@ export const saveStory = async (
       content,
     },
   });
-  revalidatePath("/api/stories");
+  revalidatePath("/");
 };

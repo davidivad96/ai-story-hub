@@ -10,8 +10,8 @@ const Sidebar: React.FC = async () => {
     <Card style={{ width: 300, padding: 16 }}>
       <Flex direction="column" gap="4">
         <Heading mb="4">Stories</Heading>
-        {Object.entries(stories ?? []).map(([id, story]) => (
-          <StoryCard key={id} id={id} story={story} />
+        {Object.values(stories ?? []).map((story) => (
+          <StoryCard key={story.id} story={story} />
         ))}
       </Flex>
     </Card>
