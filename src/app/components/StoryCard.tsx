@@ -11,7 +11,7 @@ const StoryCard: React.FC<Props> = ({
 }) => (
   <Dialog.Root>
     <Dialog.Trigger>
-      <Card key={id} style={{ cursor: "pointer" }}>
+      <Card key={id} mb="4" style={{ cursor: "pointer" }}>
         <Heading size="4" mb="2">
           {title}
         </Heading>
