@@ -1,6 +1,6 @@
+import { Story } from "@/types";
 import { Card, Flex, Heading, ScrollArea } from "@radix-ui/themes";
 import { kv } from "@vercel/kv";
-import { Story } from "../types";
 import StoryCard from "./StoryCard";
 
 const Sidebar: React.FC = async () => {

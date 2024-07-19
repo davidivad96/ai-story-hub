@@ -1,9 +1,10 @@
 "use server";
 
+import { FormData, Story } from "@/types";
 import { kv } from "@vercel/kv";
 import { generateId } from "ai";
 import { revalidatePath } from "next/cache";
-import { FormData, Story } from "./types";
+import { signOut } from "./auth";
 
 export const saveStory = async (
   { title, genre, narrativeStyle, theme, language }: FormData,
@@ -27,4 +28,8 @@ export const saveStory = async (
 export const deleteStory = async (storyId: string) => {
   await kv.hdel("stories", storyId);
   revalidatePath("/");
+};
+
+export const logout = async () => {
+  await signOut({ redirectTo: "/login" });
 };

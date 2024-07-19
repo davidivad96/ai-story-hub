@@ -1,11 +1,16 @@
 "use client";
 
+import { logout } from "@/actions";
 import { GitHubLogoIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { Flex, Heading, IconButton } from "@radix-ui/themes";
 import { useTheme } from "next-themes";
 import Logo from "./Logo";
 
-const Header: React.FC = () => {
+type Props = {
+  loggedIn: boolean;
+};
+
+const Header: React.FC<Props> = ({ loggedIn }) => {
   const { theme, setTheme } = useTheme();
 
   const switchTheme = () => {
@@ -31,6 +36,11 @@ const Header: React.FC = () => {
             <SunIcon width="20" height="20" />
           )}
         </IconButton>
+        {loggedIn && (
+          <IconButton variant="ghost" onClick={() => logout()}>
+            Logout
+          </IconButton>
+        )}
       </Flex>
     </Flex>
   );

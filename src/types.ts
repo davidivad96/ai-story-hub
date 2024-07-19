@@ -1,4 +1,4 @@
-import { GENRES, LANGUAGES, NARRATIVE_STYLES, TONES } from "./constants";
+import { GENRES, LANGUAGES, NARRATIVE_STYLES, TONES } from "@/constants";
 
 export type Genre = (typeof GENRES)[number];
 

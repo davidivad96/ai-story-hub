@@ -1,4 +1,4 @@
-import { MODEL_NAME, SYSTEM_PROMPT } from "@/app/constants";
+import { MODEL_NAME, SYSTEM_PROMPT } from "@/constants";
 import { openai } from "@ai-sdk/openai";
 import { streamText } from "ai";
 

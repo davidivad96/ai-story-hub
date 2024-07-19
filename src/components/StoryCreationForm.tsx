@@ -1,7 +1,5 @@
 "use client";
 
-import { Flex, Select, TextArea, TextField } from "@radix-ui/themes";
-import { useState } from "react";
 import {
   CHARACTERS,
   GENRES,
@@ -10,12 +8,14 @@ import {
   SETTINGS,
   THEMES,
   TONES,
-} from "../constants";
-import { FormData, Genre, Language, NarrativeStyle, Tone } from "../types";
+} from "@/constants";
+import { FormData, Genre, Language, NarrativeStyle, Tone } from "@/types";
+import { Flex, Select, TextArea, TextField } from "@radix-ui/themes";
+import { useState } from "react";
 import LabeledContent from "./LabeledContent";
 import StoryModal from "./StoryModal";
 
-const Form: React.FC = () => {
+const StoryCreationForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
     title: "",
     genre: GENRES[0],
@@ -132,4 +132,4 @@ const Form: React.FC = () => {
   );
 };
 
-export default Form;
+export default StoryCreationForm;
