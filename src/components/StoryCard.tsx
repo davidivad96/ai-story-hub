@@ -1,5 +1,5 @@
+import { Story } from "@/types";
 import { Badge, Card, Dialog, Flex, Heading } from "@radix-ui/themes";
-import { Story } from "../types";
 import DeleteStoryButton from "./DeleteStoryButton";
 import StoryModalContent from "./StoryModalContent";
 
@@ -12,7 +12,7 @@ const StoryCard: React.FC<Props> = ({
 }) => (
   <Dialog.Root>
     <Dialog.Trigger>
-      <Card key={id} mb="4" style={{ cursor: "pointer" }}>
+      <Card key={id} mb="4" className="cursor-pointer">
         <Flex justify="between" align="center" mb="2">
           <Heading size="4">{title}</Heading>
           <DeleteStoryButton storyId={id} />

@@ -8,7 +8,7 @@ type Props = {
 
 const StoryModalContent: React.FC<Props> = ({ title, content }) => (
   <Dialog.Content maxWidth="800px">
-    <Dialog.Close style={{ float: "right" }}>
+    <Dialog.Close className="float-right">
       <IconButton variant="ghost">
         <Cross1Icon />
       </IconButton>

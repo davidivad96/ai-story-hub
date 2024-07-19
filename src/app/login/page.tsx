@@ -1,18 +1,25 @@
 import { auth } from "@/auth";
 import GithubSigninButton from "@/components/GithubSigninButton";
+import GuestEnterButton from "@/components/GuestEnterButton";
 import { Flex } from "@radix-ui/themes";
 import { redirect } from "next/navigation";
 
 const Login: React.FC = async () => {
   const session = await auth();
-  console.log("SESSION", session);
   if (session) {
     redirect("/");
   }
 
   return (
-    <Flex justify="center" align="center" style={{ flex: 1 }}>
+    <Flex
+      direction="column"
+      justify="center"
+      align="center"
+      gap="2"
+      className="flex-1"
+    >
       <GithubSigninButton />
+      <GuestEnterButton />
     </Flex>
   );
 };

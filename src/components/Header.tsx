@@ -1,10 +1,17 @@
 "use client";
 
 import { logout } from "@/actions";
-import { GitHubLogoIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { Flex, Heading, IconButton } from "@radix-ui/themes";
+import {
+  ArrowLeftIcon,
+  GitHubLogoIcon,
+  MoonIcon,
+  SunIcon,
+} from "@radix-ui/react-icons";
+import { Box, Flex, Heading, IconButton } from "@radix-ui/themes";
 import { useTheme } from "next-themes";
+import { usePathname, useRouter } from "next/navigation";
 import Logo from "./Logo";
+import PowerOffLogo from "./PowerOffLogo";
 
 type Props = {
   loggedIn: boolean;
@@ -12,6 +19,8 @@ type Props = {
 
 const Header: React.FC<Props> = ({ loggedIn }) => {
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const switchTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
@@ -24,6 +33,19 @@ const Header: React.FC<Props> = ({ loggedIn }) => {
         <Heading size="6">AI Story Hub</Heading>
       </Flex>
       <Flex align="center" gap="4">
+        {pathname === "/" ? (
+          loggedIn ? (
+            <IconButton variant="ghost" onClick={() => logout()}>
+              <PowerOffLogo />
+              <Box mr="4px" />
+              Logout
+            </IconButton>
+          ) : (
+            <IconButton variant="ghost" onClick={() => router.push("/login")}>
+              <ArrowLeftIcon className="mr-1" /> Go back
+            </IconButton>
+          )
+        ) : null}
         <IconButton variant="ghost">
           <a href="https://github.com/davidivad96/ai-story-hub" target="_blank">
             <GitHubLogoIcon width="20" height="20" />
@@ -36,11 +58,6 @@ const Header: React.FC<Props> = ({ loggedIn }) => {
             <SunIcon width="20" height="20" />
           )}
         </IconButton>
-        {loggedIn && (
-          <IconButton variant="ghost" onClick={() => logout()}>
-            Logout
-          </IconButton>
-        )}
       </Flex>
     </Flex>
   );
