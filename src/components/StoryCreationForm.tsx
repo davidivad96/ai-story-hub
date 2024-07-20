@@ -15,23 +15,29 @@ import { useState } from "react";
 import LabeledContent from "./LabeledContent";
 import StoryModal from "./StoryModal";
 
+const initialFormData: FormData = {
+  title: "",
+  genre: GENRES[0],
+  theme: THEMES[0],
+  setting: SETTINGS[0],
+  character: CHARACTERS[0],
+  narrativeStyle: NARRATIVE_STYLES[0],
+  tone: TONES[0],
+  language: LANGUAGES[0],
+};
+
 const StoryCreationForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    title: "",
-    genre: GENRES[0],
-    theme: THEMES[0],
-    setting: SETTINGS[0],
-    character: CHARACTERS[0],
-    narrativeStyle: NARRATIVE_STYLES[0],
-    tone: TONES[0],
-    language: LANGUAGES[0],
-  });
+  const [formData, setFormData] = useState<FormData>(initialFormData);
 
   const updateForm =
     <K extends keyof FormData>(key: K) =>
     (value: FormData[K]) => {
       setFormData((prev) => ({ ...prev, [key]: value }));
     };
+
+  const resetForm = () => {
+    setFormData(initialFormData);
+  };
 
   return (
     <Flex direction="column" gap="4">
@@ -127,7 +133,11 @@ const StoryCreationForm: React.FC = () => {
           onChange={(e) => updateForm("setting")(e.target.value)}
         />
       </LabeledContent>
-      <StoryModal formData={formData} disabled={!formData.title} />
+      <StoryModal
+        formData={formData}
+        disabled={!formData.title}
+        onComplete={resetForm}
+      />
     </Flex>
   );
 };

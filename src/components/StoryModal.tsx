@@ -1,5 +1,6 @@
 import { Button, Dialog, Tooltip } from "@radix-ui/themes";
 import { useCompletion } from "ai/react";
+import { useState } from "react";
 import { saveStory } from "../actions";
 import { FormData } from "../types";
 import StoryModalContent from "./StoryModalContent";
@@ -7,14 +8,21 @@ import StoryModalContent from "./StoryModalContent";
 type Props = {
   formData: FormData;
   disabled?: boolean;
+  onComplete?: () => void;
 };
 
-const StoryModal: React.FC<Props> = ({ formData, disabled = false }) => {
+const StoryModal: React.FC<Props> = ({
+  formData,
+  disabled = false,
+  onComplete = () => {},
+}) => {
   const { complete, completion, stop } = useCompletion({
     api: "/api/completion",
   });
+  const [title, setTitle] = useState("");
 
   const handleGenerate = async () => {
+    setTitle(formData.title);
     const response = await complete(`
       Tell me a story with the following parameters:
       - Genre: ${formData.genre}
@@ -27,6 +35,7 @@ const StoryModal: React.FC<Props> = ({ formData, disabled = false }) => {
     `);
     if (response) {
       await saveStory(formData, response);
+      onComplete();
     }
   };
 
@@ -49,7 +58,7 @@ const StoryModal: React.FC<Props> = ({ formData, disabled = false }) => {
           </Button>
         )}
       </Dialog.Trigger>
-      <StoryModalContent title={formData.title} content={completion} />
+      <StoryModalContent title={title} content={completion} />
     </Dialog.Root>
   );
 };
