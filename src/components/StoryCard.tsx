@@ -15,7 +15,7 @@ const StoryCard: React.FC<Props> = ({
   <Dialog.Root>
     <Dialog.Trigger>
       <Card key={id} mb="4" className="cursor-pointer">
-        <Flex justify="between" align="center" mb="2">
+        <Flex justify="between" mb="2">
           <Heading size="4">{title}</Heading>
           {canDelete && <DeleteStoryButton storyId={id} />}
         </Flex>

@@ -6,3 +6,6 @@ export const getNameInitials = (name: string) =>
     .join("");
 
 export const getKvKey = (key: string) => `stories:${key}`;
+
+export const getRandomElement = <T>(arr: T[]): T =>
+  arr[Math.floor(Math.random() * arr.length)];

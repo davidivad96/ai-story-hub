@@ -151,3 +151,25 @@ export const TONES = [
 ] as const;
 
 export const LANGUAGES = ["Spanish", "English"] as const;
+
+export const TITLES = [
+  "The Quest for the Lost Treasure",
+  "The Secret of the Enchanted Forest",
+  "The Curse of the Haunted Mansion",
+  "The Last Stand of the Brave Knight",
+  "The Mysterious Island Adventure",
+  "The Dark Lord's Revenge",
+  "The Journey to the Unknown",
+  "The Legend of the Noble Queen",
+  "The Detective and the Missing Heirloom",
+  "The Rogue's Gambit",
+  "The Sorcerer's Apprentice",
+  "The Hero's Journey",
+  "The Explorer's Discovery",
+  "The Anti-Hero's Dilemma",
+  "The Sorceress's Secret",
+  "The Lovers' Tragedy",
+  "The Sidekick's Tale",
+  "The Allies' Alliance",
+  "The Ordinary Hero",
+] as const;
