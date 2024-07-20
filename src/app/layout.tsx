@@ -25,7 +25,7 @@ const RootLayout: React.FC<PropsWithChildren> = async ({ children }) => {
         <ThemeProvider attribute="class" defaultTheme="dark">
           <Theme accentColor="gray">
             <Flex className="min-h-screen" direction="column">
-              <Header loggedIn={session !== null} />
+              <Header user={session?.user} />
               {children}
               <Footer />
             </Flex>

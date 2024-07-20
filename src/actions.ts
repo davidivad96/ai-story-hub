@@ -31,5 +31,5 @@ export const deleteStory = async (storyId: string) => {
 };
 
 export const logout = async () => {
-  await signOut({ redirectTo: "/login" });
+  await signOut();
 };
