@@ -6,10 +6,10 @@ import { Flex, Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { Inter } from "next/font/google";
+import { Rubik } from "next/font/google";
 import { PropsWithChildren } from "react";
 
-const inter = Inter({ subsets: ["latin"] });
+const rubik = Rubik({ subsets: ["arabic"], variable: "--rubik" });
 
 export const metadata: Metadata = {
   title: "AI Story Hub",
@@ -20,10 +20,10 @@ const RootLayout: React.FC<PropsWithChildren> = async ({ children }) => {
   const session = await auth();
 
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+    <html className={rubik.variable} lang="en" suppressHydrationWarning>
+      <body>
         <ThemeProvider attribute="class" defaultTheme="dark">
-          <Theme accentColor="gray">
+          <Theme>
             <Flex className="min-h-screen" direction="column">
               <Header user={session?.user} />
               {children}

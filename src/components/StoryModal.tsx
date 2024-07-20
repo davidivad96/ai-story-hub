@@ -48,12 +48,12 @@ const StoryModal: React.FC<Props> = ({
       <Dialog.Trigger>
         {disabled ? (
           <Tooltip content="Title is required">
-            <Button variant="outline" disabled>
+            <Button variant="surface" disabled>
               Generate
             </Button>
           </Tooltip>
         ) : (
-          <Button variant="outline" onClick={handleGenerate}>
+          <Button variant="surface" onClick={handleGenerate}>
             Generate
           </Button>
         )}
