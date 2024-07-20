@@ -5,17 +5,19 @@ import StoryModalContent from "./StoryModalContent";
 
 type Props = {
   story: Story;
+  canDelete?: boolean;
 };
 
 const StoryCard: React.FC<Props> = ({
   story: { id, title, genre, narrativeStyle, theme, language, content },
+  canDelete,
 }) => (
   <Dialog.Root>
     <Dialog.Trigger>
       <Card key={id} mb="4" className="cursor-pointer">
         <Flex justify="between" align="center" mb="2">
           <Heading size="4">{title}</Heading>
-          <DeleteStoryButton storyId={id} />
+          {canDelete && <DeleteStoryButton storyId={id} />}
         </Flex>
         {genre && <Badge mr="2">{genre}</Badge>}
         {narrativeStyle && <Badge mr="2">{narrativeStyle}</Badge>}

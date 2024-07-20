@@ -17,7 +17,7 @@ const Sidebar: React.FC = async () => {
         <Heading mb="4">{session ? "Your Stories" : "Guest Stories"}</Heading>
         <ScrollArea className="h-full">
           {Object.values(stories ?? []).map((story) => (
-            <StoryCard key={story.id} story={story} />
+            <StoryCard key={story.id} story={story} canDelete={!!session} />
           ))}
         </ScrollArea>
       </Flex>
