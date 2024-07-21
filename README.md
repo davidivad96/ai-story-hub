@@ -2,6 +2,8 @@
 
 Using AI to create personalized stories.
 
+<img width="1438" alt="Screenshot 2024-07-21 at 15 46 05" src="https://github.com/user-attachments/assets/5c126ac8-e636-463e-af02-7aed55a45154">
+
 ## Description
 
 AI Story Hub is a web application that allows users to create stories with the help of AI. The app uses the Vercel AI SDK to generate personalized stories based on the user's input. Users can create stories with a simple interface and save them to the cloud.
