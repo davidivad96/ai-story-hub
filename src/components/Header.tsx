@@ -1,43 +1,31 @@
-"use client";
-
-import { logout } from "@/actions";
+import { auth } from "@/auth";
 import { Story } from "@/types";
-import { getNameInitials } from "@/utils";
+import { getKvKey } from "@/utils";
+import { GitHubLogoIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import {
-  GitHubLogoIcon,
-  HamburgerMenuIcon,
-  MoonIcon,
-  SunIcon,
-} from "@radix-ui/react-icons";
-import {
-  Avatar,
   Box,
   DropdownMenu,
   Flex,
   Heading,
   IconButton,
+  Link,
   ScrollArea,
   Separator,
   Text,
 } from "@radix-ui/themes";
-import { User } from "next-auth";
-import { signIn } from "next-auth/react";
-import { useTheme } from "next-themes";
+import { kv } from "@vercel/kv";
 import Logo from "./Logo";
-import PowerOffLogo from "./PowerOffLogo";
-import StoryCard from "./StoryCard";
+import StoriesList from "./StoriesList";
+import ThemeSwitcher from "./ThemeSwitcher";
+import UserSection from "./UserSection";
 
-type Props = {
-  user?: User | null;
-  stories: Story[];
-};
-
-const Header: React.FC<Props> = ({ user, stories }) => {
-  const { theme, setTheme } = useTheme();
-
-  const switchTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
+const Header: React.FC = async () => {
+  const session = await auth();
+  const user = session?.user;
+  const stories = await kv.hgetall<Record<string, Story>>(
+    getKvKey(session?.user?.email ?? "guest")
+  );
+  const storiesArray = Object.values(stories ?? []);
 
   return (
     <>
@@ -59,20 +47,14 @@ const Header: React.FC<Props> = ({ user, stories }) => {
         </Flex>
         <Flex align="center" gap="4">
           <IconButton variant="ghost">
-            <a
+            <Link
               href="https://github.com/davidivad96/ai-story-hub"
               target="_blank"
             >
               <GitHubLogoIcon width="20" height="20" color="var(--primary)" />
-            </a>
+            </Link>
           </IconButton>
-          <IconButton variant="ghost" onClick={switchTheme}>
-            {theme === "dark" ? (
-              <MoonIcon width="20" height="20" color="var(--primary)" />
-            ) : (
-              <SunIcon width="20" height="20" color="var(--primary)" />
-            )}
-          </IconButton>
+          <ThemeSwitcher />
           <DropdownMenu.Root>
             <DropdownMenu.Trigger>
               <IconButton variant="ghost" className="sm:hidden">
@@ -81,77 +63,17 @@ const Header: React.FC<Props> = ({ user, stories }) => {
             </DropdownMenu.Trigger>
             <DropdownMenu.Content sideOffset={5}>
               <Box p="3">
-                {user ? (
-                  <Flex justify="end" align="center" gap="2">
-                    <IconButton
-                      variant="solid"
-                      onClick={() => logout()}
-                      className="w-auto p-2"
-                    >
-                      <PowerOffLogo />
-                      <Text className="text-button-text ml-1">Logout</Text>
-                    </IconButton>
-                    <Avatar
-                      src={user.image ?? ""}
-                      fallback={getNameInitials(user.name ?? "")}
-                      className="rounded-full"
-                    />
-                  </Flex>
-                ) : (
-                  <IconButton
-                    variant="solid"
-                    onClick={() => signIn("github")}
-                    className="w-auto p-2"
-                  >
-                    <Text className="text-button-text">Login</Text>
-                  </IconButton>
-                )}
+                <UserSection user={user} />
                 <Separator className="my-4 w-full" />
                 <Text>{user ? "Your Stories:" : "Guest Stories:"}</Text>
                 <ScrollArea className="h-full mt-4">
-                  {stories.length > 0 ? (
-                    stories.map((story) => (
-                      <StoryCard
-                        key={story.id}
-                        story={story}
-                        canDelete={!!user}
-                      />
-                    ))
-                  ) : (
-                    <Text className="text-gray-500 text-center mt-4">
-                      No stories yet
-                    </Text>
-                  )}
+                  <StoriesList stories={storiesArray} canDelete={!!user} />
                 </ScrollArea>
               </Box>
             </DropdownMenu.Content>
           </DropdownMenu.Root>
           <Box className="hidden sm:block">
-            {user ? (
-              <Flex align="center" gap="2">
-                <IconButton
-                  variant="solid"
-                  onClick={() => logout()}
-                  className="w-auto p-2"
-                >
-                  <PowerOffLogo />
-                  <Text className="text-button-text ml-1">Logout</Text>
-                </IconButton>
-                <Avatar
-                  src={user.image ?? ""}
-                  fallback={getNameInitials(user.name ?? "")}
-                  className="rounded-full"
-                />
-              </Flex>
-            ) : (
-              <IconButton
-                variant="solid"
-                onClick={() => signIn("github")}
-                className="w-auto p-2"
-              >
-                <Text className="text-button-text">Login</Text>
-              </IconButton>
-            )}
+            <UserSection user={user} />
           </Box>
         </Flex>
       </Flex>

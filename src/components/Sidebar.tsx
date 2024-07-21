@@ -1,9 +1,9 @@
 import { auth } from "@/auth";
 import { Story } from "@/types";
 import { getKvKey } from "@/utils";
-import { Card, Flex, Heading, ScrollArea, Text } from "@radix-ui/themes";
+import { Card, Flex, Heading, ScrollArea } from "@radix-ui/themes";
 import { kv } from "@vercel/kv";
-import StoryCard from "./StoryCard";
+import StoriesList from "./StoriesList";
 
 const Sidebar: React.FC = async () => {
   const session = await auth();
@@ -17,15 +17,7 @@ const Sidebar: React.FC = async () => {
       <Flex direction="column" height="100%">
         <Heading mb="4">{session ? "Your Stories" : "Guest Stories"}</Heading>
         <ScrollArea className="h-full">
-          {storiesArray.length > 0 ? (
-            Object.values(storiesArray).map((story) => (
-              <StoryCard key={story.id} story={story} canDelete={!!session} />
-            ))
-          ) : (
-            <Text className="text-gray-500 text-center mt-4">
-              No stories yet
-            </Text>
-          )}
+          <StoriesList stories={storiesArray} canDelete={!!session} />
         </ScrollArea>
       </Flex>
     </Card>

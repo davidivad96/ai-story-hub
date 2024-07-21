@@ -7,7 +7,7 @@ const Main = async () => (
     p="4"
     gap="6"
     className="bg-background-secondary"
-    style={{ height: "calc(100vh - 116px)" }}
+    style={{ height: "calc(100vh - 126px)" }}
   >
     <Sidebar />
     <CreateStoryFormCard />
