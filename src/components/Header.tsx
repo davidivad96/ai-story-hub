@@ -38,10 +38,7 @@ const Header: React.FC = async () => {
       >
         <Flex align="center" gap="4">
           <Logo />
-          <Heading
-            size={{ initial: "5", xs: "6" }}
-            className="bg-gradient-primary bg-clip-text text-transparent"
-          >
+          <Heading className="bg-gradient-primary bg-clip-text text-transparent">
             AI Story Hub
           </Heading>
         </Flex>
