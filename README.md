@@ -16,6 +16,7 @@ AI Story Hub is a web application that allows users to create stories with the h
 - Use AI to generate personalized stories
 - Light and dark mode
 - Login with GitHub or use the app as a guest
+- Responsive design
 
 ## Tech Stack
 
