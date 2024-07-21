@@ -13,7 +13,7 @@ const Sidebar: React.FC = async () => {
   const storiesArray = Object.values(stories ?? []);
 
   return (
-    <Card className="p-4 w-72" style={{ height: "calc(100vh - 166px)" }}>
+    <Card className="p-4 w-72 hidden sm:block">
       <Flex direction="column" height="100%">
         <Heading mb="4">{session ? "Your Stories" : "Guest Stories"}</Heading>
         <ScrollArea className="h-full">

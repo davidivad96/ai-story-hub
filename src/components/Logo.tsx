@@ -2,10 +2,9 @@ const Logo: React.FC = () => (
   <svg
     fill="var(--logo-body)"
     version="1.1"
+    className="h-8 w-8 xs:h-10 xs:w-10"
     id="Capa_1"
     xmlns="http://www.w3.org/2000/svg"
-    width="50px"
-    height="50px"
     viewBox="0 0 481.508 481.508"
   >
     <g>

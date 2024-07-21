@@ -13,7 +13,7 @@ import {
 import { FormData } from "@/types";
 import { getRandomElement } from "@/utils";
 import { ShuffleIcon } from "@radix-ui/react-icons";
-import { Button, Card, Container, Flex, Heading } from "@radix-ui/themes";
+import { Button, Card, Container, Flex, Heading, Text } from "@radix-ui/themes";
 import { useState } from "react";
 import StoryCreationForm from "./StoryCreationForm";
 
@@ -59,9 +59,10 @@ const CreateStoryFormCard: React.FC = () => {
     <Container size="3">
       <Flex direction="column">
         <Flex justify="between" align="center" mb="4">
-          <Heading>Create your story</Heading>
+          <Heading>Create new story</Heading>
           <Button variant="surface" onClick={randomizeForm}>
-            Make it random <ShuffleIcon />
+            <Text className="hidden sm:inline-flex">Make it random</Text>{" "}
+            <ShuffleIcon />
           </Button>
         </Flex>
         <Card className="p-4">

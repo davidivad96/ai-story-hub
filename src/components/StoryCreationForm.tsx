@@ -1,6 +1,6 @@
 import { GENRES, LANGUAGES, NARRATIVE_STYLES, TONES } from "@/constants";
 import { FormData, Genre, Language, NarrativeStyle, Tone } from "@/types";
-import { Flex, Select, TextArea, TextField } from "@radix-ui/themes";
+import { Flex, Grid, Select, TextArea, TextField } from "@radix-ui/themes";
 import LabeledContent from "./LabeledContent";
 import StoryModal from "./StoryModal";
 
@@ -25,7 +25,7 @@ const StoryCreationForm: React.FC<Props> = ({
         onChange={(e) => updateForm("title")(e.target.value)}
       />
     </LabeledContent>
-    <Flex gap="4">
+    <Grid columns={{ initial: "2", md: "4" }} gap="4" justify="between">
       <LabeledContent label="Genre">
         <Select.Root
           value={formData.genre}
@@ -88,7 +88,7 @@ const StoryCreationForm: React.FC<Props> = ({
           </Select.Content>
         </Select.Root>
       </LabeledContent>
-    </Flex>
+    </Grid>
     <LabeledContent label="Theme">
       <TextField.Root
         placeholder="Love and friendship"
