@@ -11,6 +11,7 @@ export const POST = async (req: Request) => {
     model: openai(MODEL_NAME),
     prompt,
     system: SYSTEM_PROMPT,
+    temperature: 1,
   });
   return result.toAIStreamResponse();
 };
