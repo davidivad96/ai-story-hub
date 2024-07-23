@@ -7,6 +7,14 @@ import { revalidatePath } from "next/cache";
 import { auth, signOut } from "./auth";
 import { getKvKey } from "./utils";
 
+export const getAllStories = async () => {
+  const session = await auth();
+  const stories = await kv.hgetall<Record<string, Story>>(
+    getKvKey(session?.user?.email ?? "guest")
+  );
+  return Object.values(stories ?? []);
+};
+
 export const saveStory = async (
   { title, genre, narrativeStyle, theme, language }: FormData,
   content: string

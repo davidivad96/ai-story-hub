@@ -1,6 +1,5 @@
+import { getAllStories } from "@/actions";
 import { auth } from "@/auth";
-import { Story } from "@/types";
-import { getKvKey } from "@/utils";
 import { GitHubLogoIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import {
   Box,
@@ -12,7 +11,6 @@ import {
   Separator,
   Text,
 } from "@radix-ui/themes";
-import { kv } from "@vercel/kv";
 import Logo from "./Logo";
 import StoriesList from "./StoriesList";
 import ThemeSwitcher from "./ThemeSwitcher";
@@ -21,10 +19,7 @@ import UserSection from "./UserSection";
 const Header: React.FC = async () => {
   const session = await auth();
   const user = session?.user;
-  const stories = await kv.hgetall<Record<string, Story>>(
-    getKvKey(session?.user?.email ?? "guest")
-  );
-  const storiesArray = Object.values(stories ?? []);
+  const stories = await getAllStories();
 
   return (
     <>
@@ -63,7 +58,7 @@ const Header: React.FC = async () => {
                 <Separator className="my-4 w-full" />
                 <Text>{user ? "Your Stories:" : "Guest Stories:"}</Text>
                 <Box className="mb-4" />
-                <StoriesList stories={storiesArray} canDelete={!!user} />
+                <StoriesList stories={stories} canDelete={!!user} />
               </Box>
             </DropdownMenu.Content>
           </DropdownMenu.Root>
