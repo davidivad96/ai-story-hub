@@ -9,7 +9,6 @@ import {
   Heading,
   IconButton,
   Link,
-  ScrollArea,
   Separator,
   Text,
 } from "@radix-ui/themes";
@@ -63,9 +62,8 @@ const Header: React.FC = async () => {
                 <UserSection user={user} />
                 <Separator className="my-4 w-full" />
                 <Text>{user ? "Your Stories:" : "Guest Stories:"}</Text>
-                <ScrollArea className="h-full mt-4">
-                  <StoriesList stories={storiesArray} canDelete={!!user} />
-                </ScrollArea>
+                <Box className="mb-4" />
+                <StoriesList stories={storiesArray} canDelete={!!user} />
               </Box>
             </DropdownMenu.Content>
           </DropdownMenu.Root>
